@@ -1,8 +1,8 @@
 # easytkinter
 
-A small module in development that aims to make building graphical interfaces with `tkinter` simpler.
+A small module in development that aims to make building graphical interfaces with `tkinter` simpler by providing shorter helper functions.
 
-> **Status:** This project is not finished, and its API may change. For now, the module includes functions to create a window, set its size and title, and add labels and buttons.
+> **Status:** This project is not finished, and its API may change. For now, the module includes functions to create a window, set its size and title, and add labels, buttons, and checkbuttons.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ etk.rbutton("Exit", command=lambda: etk.root.destroy())
 etk.run()
 ```
 
-`window()` creates the main window. The `rlabel()` and `rbutton()` widgets are automatically placed with `pack()` and returned so you can configure them later.
+`window()` creates the main window. The `r` prefix means the widget is added directly to the root window. The `rlabel()`, `rbutton()`, and `rcheckbtn()` widgets are automatically placed with `pack()` and returned so you can configure them later.
 
 ## Available functions
 
@@ -39,9 +39,10 @@ etk.run()
 
 - `rlabel(text="", font=None, fg=None, bg=None, padx=1, pady=1)` — creates and adds a label.
 - `rbutton(text="", command=None, bg=None, fg=None, font=None, state="normal", width=None, height=None, activebackground=None, activeforeground=None)` — creates and adds a button. `command` is the function to call when the button is clicked.
-- `boolvar(value=None)` and `rcheckbtn(...)` — are present in the module, but still need work before they can be considered functional.
+- `boolvar(value=None)` — creates a `tkinter.BooleanVar` for use with a checkbutton.
+- `rcheckbtn(text="", variable=None, onvalue=None, offvalue=None, command=None)` — creates a checkbutton directly in the root window. `variable` is the associated Tk variable; `onvalue` and `offvalue` set its checked and unchecked values; `command` is called when its state changes.
 
-Style and behavior options generally correspond to those of the `tkinter` `Label` and `Button` widgets.
+Style and behavior options generally correspond to those of the matching `tkinter` widgets.
 
 ## Current example
 
