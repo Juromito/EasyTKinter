@@ -1,5 +1,9 @@
 import tkinter as tk
 
+
+
+#Window atributes--------------
+
 def window(x = 400, y = 300, text = "ETK window"):
     global root
     root = tk.Tk()
@@ -11,6 +15,8 @@ def geometry(x, y):
 
 def title(text):
     root.title(text)
+
+#Widgets----------------------
 
 def rlabel(text="", 
             font=None, 
@@ -53,9 +59,7 @@ def rbutton(text="",
     button.pack()
     return button
 
-def boolvar(value=None):
-    tk.BooleanVar(value=value)
-    return 
+
 
 def rcheckbtn(text="", 
             variable=None, 
@@ -69,6 +73,34 @@ def rcheckbtn(text="",
                                 command=command)
     checkbutton.pack()
     return checkbutton
+
+def rradiobtn(text="", 
+            variable=None, 
+            value=None, 
+            command=None, 
+            state=None):
+    radiobutton = tk.Radiobutton(text=text, 
+                                variable=variable, 
+                                value=value, 
+                                command=command, 
+                                state=state)
+    radiobutton.pack()
+    return radiobutton
+
+
+
+
+#Variables--------------------    
+
+def boolvar(value=None):
+    varbool = tk.BooleanVar(value=value)
+    return varbool
+
+def strvar(value=""):
+    varstr = tk.StringVar(value=value)
+    return varstr
+
+#Mainloop----------------------
 
 def run():
     root.mainloop()
