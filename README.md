@@ -1,53 +1,56 @@
 # easytkinter
 
-A small module in development that aims to make building graphical interfaces with `tkinter` simpler by providing shorter helper functions.
-
-> **Status:** This project is not finished, and its API may change. For now, the module includes functions to create a window, set its size and title, and add labels, buttons, and checkbuttons.
+`easytkinter` is a small module in development that wraps a few common `tkinter` tasks in short helper functions. Its API may change as the project grows.
 
 ## Requirements
 
 - Python 3
 - `tkinter` available in your Python installation
 
-## Example
+## Getting started
 
-Place `easytkinter.py` next to your program and import it as `etk`:
+Keep `easytkinter.py` next to your Python script, then import it as `etk`:
 
 ```python
 import easytkinter as etk
 
-etk.window(400, 300, "My window")
+etk.window(400, 300, "My first window")
 
-etk.rlabel("Hello!")
-etk.rbutton("Exit", command=lambda: etk.root.destroy())
+message = etk.rlabel("Hello!")
+etk.rbutton("Change message", command=lambda: message.config(text="Button clicked!"))
 
 etk.run()
 ```
 
-`window()` creates the main window. The `r` prefix means the widget is added directly to the root window. The `rlabel()`, `rbutton()`, and `rcheckbtn()` widgets are automatically placed with `pack()` and returned so you can configure them later.
+Call `window()` before creating widgets or Tk variables. Call `run()` after setting up the interface to start Tk's event loop.
 
 ## Available functions
 
 ### Window
 
-- `window(x=400, y=300, text="ETK window")` — creates the main window with the given dimensions and title.
-- `geometry(x, y)` — changes the dimensions of the existing window.
-- `title(text)` — changes the title of the existing window.
-- `run()` — starts the `tkinter` event loop; call this at the end of your program.
+- `window(x=400, y=300, text="ETK window")` — creates the root window with the given width, height, and title.
+- `geometry(x, y)` — changes the root window size.
+- `title(text)` — changes the root window title.
+- `run()` — starts the root window's event loop.
 
 ### Widgets
 
-- `rlabel(text="", font=None, fg=None, bg=None, padx=1, pady=1)` — creates and adds a label.
-- `rbutton(text="", command=None, bg=None, fg=None, font=None, state="normal", width=None, height=None, activebackground=None, activeforeground=None)` — creates and adds a button. `command` is the function to call when the button is clicked.
-- `boolvar(value=None)` — creates a `tkinter.BooleanVar` for use with a checkbutton.
-- `rcheckbtn(text="", variable=None, onvalue=None, offvalue=None, command=None)` — creates a checkbutton directly in the root window. `variable` is the associated Tk variable; `onvalue` and `offvalue` set its checked and unchecked values; `command` is called when its state changes.
+The `r` prefix means the widget is created directly in the root window. These helpers call `pack()` automatically and return the created widget.
 
-Style and behavior options generally correspond to those of the matching `tkinter` widgets.
+- `rlabel(text="", font=None, fg=None, bg=None, padx=1, pady=1)` — creates a label.
+- `rbutton(text="", command=None, bg=None, fg=None, font=None, state="normal", width=None, height=None, activebackground=None, activeforeground=None)` — creates a button. `command` is called when the button is clicked.
+- `rcheckbtn(text="", variable=None, onvalue=None, offvalue=None, command=None)` — creates a checkbutton. Pass a Tk variable with `variable`; `onvalue` and `offvalue` set the values for its checked and unchecked states.
+- `rradiobtn(text="", variable=None, value=None, command=None, state=None)` — creates a radio button. Radio buttons in the same group share a variable and each have a different `value`.
 
-## Current example
+### Tk variables
 
-The `testhere.py` file demonstrates creating a 400 × 300 pixel window and starting the event loop.
+- `boolvar(value=None)` — creates and returns a `tkinter.BooleanVar`, commonly used with a checkbutton.
+- `strvar(value="")` — creates and returns a `tkinter.StringVar`, commonly used with radio buttons or text values.
 
-## Next steps
+Create Tk variables after calling `window()` so they use the module's root window.
 
-The module is at an early stage. The implementation and documentation will be updated as more features are added and verified.
+## Demo
+
+Run `python testhere.py` to see the current functions together: window setup, title and geometry changes, labels, a button callback, a checkbutton with a `BooleanVar`, radio buttons sharing a `StringVar`, and the event loop.
+
+The module is still at an early stage; more widgets, layout options, and examples may be added later.
